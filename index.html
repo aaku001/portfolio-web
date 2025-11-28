@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aakash - Creative Professional Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #1a1a1a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+    }
+
+    nav .logo {
+      font-size: 24px;
+      font-weight: 600;
+      color: #ff4d4d;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 30px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ff4d4d;
+    }
+
+    /* Hero Section */
+    #hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(45deg, #1a1a1a, #2c2c2c);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero h1 {
+      font-size: 72px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    #hero p {
+      font-size: 24px;
+      color: #ff4d4d;
+      margin-bottom: 30px;
+    }
+
+    #hero .btn {
+      padding: 15px 30px;
+      background: #ff4d4d;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    #hero .btn:hover {
+      background: #e03e3e;
+    }
+
+    /* Particle Background */
+    #particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* About Section */
+    #about {
+      padding: 100px 50px;
+      background: #fff;
+      color: #1a1a1a;
+      text-align: center;
+    }
+
+    #about h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    #about p {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .skills {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .skill-card {
+      background: #f5f5f5;
+      padding: 20px;
+      border-radius: 10px;
+      width: 120px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .skill-card i {
+      font-size: 40px;
+      color: #ff4d4d;
+      margin-bottom: 10px;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-10px);
+    }
+
+    /* Services Section */
+    #services {
+      padding: 100px 50px;
+      background: #1a1a1a;
+      text-align: center;
+    }
+
+    #services h2 {
+      font-size: 48px;
+      margin-bottom: 40px;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: #2c2c2c;
+      padding: 30px;
+      border-radius: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card i {
+      font-size: 50px;
+      color: #ff4d4d;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Portfolio Section */
+    #portfolio {
+      padding: 100px 50px;
+      background: #fff;
+      color: #1a1a1a;
+      text-align: center;
+    }
+
+    #portfolio h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .filter-buttons {
+      margin-bottom: 40px;
+    }
+
+    .filter-buttons button {
+      background: #ff4d4d;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .filter-buttons button:hover,
+    .filter-buttons button.active {
+      background: #e03e3e;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .portfolio-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+
+    .portfolio-overlay h3 {
+      color: #fff;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .portfolio-overlay p {
+      color: #ff4d4d;
+    }
+
+    /* Contact Section */
+    #contact {
+      padding: 100px 50px;
+      background: #1a1a1a;
+      text-align: center;
+    }
+
+    #contact h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    #contact form {
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    #contact input,
+    #contact textarea {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background: #2c2c2c;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    #contact textarea {
+      height: 150px;
+      resize: none;
+    }
+
+    #contact button {
+      padding: 15px 30px;
+      background: #ff4d4d;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #contact button:hover {
+      background: #e03e3e;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-icons a {
+      color: #fff;
+      font-size: 30px;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #ff4d4d;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav {
+        padding: 20px;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      #hero h1 {
+        font-size: 48px;
+      }
+
+      #hero p {
+        font-size: 18px;
+      }
+
+      #about,
+      #services,
+      #portfolio,
+      #contact {
+        padding: 50px 20px;
+      }
+
+      #about h2,
+      #services h2,
+      #portfolio h2,
+      #contact h2 {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Aakash</div>
+    <ul>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <h1>Aakash</h1>
+    <p>Design. Code. Create.</p>
+    <a href="#contact" class="btn">Get in Touch</a>
+    <canvas id="particles"></canvas>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hi, I'm Aakash, a passionate Graphic Designer, Web Developer, and Video Editor. I bring ideas to life through stunning visuals, functional websites, and engaging video content. Let's create something extraordinary together!</p>
+    <div class="skills">
+      <div class="skill-card">
+        <i class="fas fa-paint-brush"></i>
+        <p>Graphic Design</p>
+      </div>
+      <div class="skill-card">
+        <i class="fas fa-code"></i>
+        <p>Web Development</p>
+      </div>
+      <div class="skill-card">
+        <i class="fas fa-video"></i>
+        <p>Video Editing</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <h2>My Services</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <i class="fas fa-paint-brush"></i>
+        <h3>Graphic Design</h3>
+        <p>Creating stunning visuals for branding, marketing, and digital media.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-code"></i>
+        <h3>Web Development</h3>
+        <p>Building responsive, modern websites with clean code and great UX.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-video"></i>
+        <h3>Video Editing</h3>
+        <p>Crafting engaging video content for promotions, stories, and more.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio">
+    <h2>My Work</h2>
+    <div class="filter-buttons">
+      <button data-filter="all" class="active">All</button>
+      <button data-filter="graphic">Graphic Design</button>
+      <button data-filter="web">Web Development</button>
+      <button data-filter="video">Video Editing</button>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item" data-category="graphic">
+        <img src="https://via.placeholder.com/300x200?text=Graphic+Design" alt="Graphic Design">
+        <div class="portfolio-overlay">
+          <h3>Graphic Design</h3>
+          <p>Branding Project</p>
+        </div>
+      </div>
+      <div class="portfolio-item" data-category="web">
+        <img src="https://via.placeholder.com/300x200?text=Web+Development" alt="Web Development">
+        <div class="portfolio-overlay">
+          <h3>Web Development</h3>
+          <p>Portfolio Website</p>
+        </div>
+      </div>
+      <div class="portfolio-item" data-category="video">
+        <img src="https://via.placeholder.com/300x200?text=Video+Editing" alt="Video Editing">
+        <div class="portfolio-overlay">
+          <h3>Video Editing</h3>
+          <p>Promotional Video</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-dribbble"></i></a>
+    </div>
+  </section>
+
+  <script>
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero Section Animations
+    gsap.from("#hero h1", {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      delay: 0.5
+    });
+
+    gsap.from("#hero p", {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      delay: 0.7
+    });
+
+    gsap.from("#hero .btn", {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      delay: 0.9
+    });
+
+    // About Section Animations
+    gsap.from("#about h2", {
+      scrollTrigger: "#about",
+      opacity: 0,
+      y: 50,
+      duration: 1
+    });
+
+    gsap.from("#about p", {
+      scrollTrigger: "#about",
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      delay: 0.2
+    });
+
+    gsap.from(".skill-card", {
+      scrollTrigger: "#about",
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+      delay: 0.4
+    });
+
+    // Services Section Animations
+    gsap.from("#services h2", {
+      scrollTrigger: "#services",
+      opacity: 0,
+      y: 50,
+      duration: 1
+    });
+
+    gsap.from(".service-card", {
+      scrollTrigger: "#services",
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+      delay: 0.2
+    });
+
+    // Portfolio Section Animations
+    gsap.from("#portfolio h2", {
+      scrollTrigger: "#portfolio",
+      opacity: 0,
+      y: 50,
+      duration: 1
+    });
+
+    gsap.from(".filter-buttons button", {
+      scrollTrigger: "#portfolio",
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.1,
+      delay: 0.2
+    });
+
+    gsap.from(".portfolio-item", {
+      scrollTrigger: "#portfolio",
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+      delay: 0.4
+    });
+
+    // Contact Section Animations
+    gsap.from("#contact h2", {
+      scrollTrigger: "#contact",
+      opacity: 0,
+      y: 50,
+      duration: 1
+    });
+
+    gsap.from("#contact form > *", {
+      scrollTrigger: "#contact",
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.2,
+      delay: 0.2
+    });
+
+    gsap.from(".social-icons a", {
+      scrollTrigger: "#contact",
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.1,
+      delay: 0.4
+    });
+
+    // Particle Background
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particlesArray = [];
+    const numberOfParticles = 100;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 5 + 1;
+        this.speedX = Math.random() * 3 - 1.5;
+        this.speedY = Math.random() * 3 - 1.5;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.size > 0.2) this.size -= 0.1;
+
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+
+      draw() {
+        ctx.fillStyle = 'rgba(255, 77, 77, 0.5)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+      }
+      requestAnimationFrame(animateParticles);
+    }
+
+    initParticles();
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    // Portfolio Filter
+    const filterButtons = document.querySelectorAll('.filter-buttons button');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filter = button.getAttribute('data-filter');
+
+        portfolioItems.forEach(item => {
+          if (filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.style.display = 'block';
+            gsap.fromTo(item, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5 });
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
